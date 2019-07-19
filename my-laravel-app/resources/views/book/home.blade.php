@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
 
                     <table border="1" width="100%">
                         <tr>
@@ -23,8 +22,8 @@
                         </tr>
                         @foreach ($books as $book)
                         <tr>
-                          <td><a href='{{ route('books.show', ['book' => $book->id]) }}'>{{ $book->id }}</td>
-                          <td>{{ $book->book_name }}</td>
+                          <td>{{ $book->id }}</td>
+                          <td><a href='{{ route('books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
                           @if ($book->user_id)
                           <td>貸し出し中</td>
                           @else

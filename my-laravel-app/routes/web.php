@@ -25,15 +25,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('books', 'BookController');
-
-Route::resource('application', 'ApplicationController');
-
-Route::get('/form', function () {
-    return view('form');
+Route::group(['middleware' => 'auth:user'], function(){
+    Route::resource('books', 'BookController');
+    Route::resource('application', 'ApplicationController');
 });
 
-// Route::post('form/import-csv', 'CsvImportController@store');
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login',    'Admin\LoginController@login');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+    Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
+    Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+
+    Route::get('/form', function () { return view('form'); });
+    Route::post('form/import-csv', 'CsvImportController@store');
+});
 
 // Route::get('/logout',[
 //     'uses' => 'UserController@getLogout',

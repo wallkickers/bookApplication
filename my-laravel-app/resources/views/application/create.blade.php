@@ -16,9 +16,8 @@
                 
                 <p>書籍名：{{ $book->book_name }}</p>
 
-                <form action='{{ route('application.store') }}' method='POST'>
+                <form action='{{ route('application.store', ['book' => $book->id]) }}' method='POST'>
                     @csrf
-                    <label>お名前：</label><input type="text" name='full_name'>
                     <button type="submit">申請</button>
                 </form>
                 </div>

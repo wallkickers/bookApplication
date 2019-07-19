@@ -13,23 +13,21 @@ class BookController extends Controller
 {
     public function index()
     {
-        // csvからインポート
-        // $reader = new Reader();
-        // $spreadsheet = $reader->load('dat_book.csv');
-
         $books = Book::all();
 
-        return view('home')->with([
+        return view('book.home')->with([
             'books' => $books
         ]);
     }
 
     public function show(Request $request)
     {
+        $user = Auth::user();
         $bookId = $request->book;
         $book = Book::where('id', $bookId)->first();
 
-        return view('show')->with([
+        return view('book.show',[
+            'user' => $user,
             'book' => $book
         ]);
     }

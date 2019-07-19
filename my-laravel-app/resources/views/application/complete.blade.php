@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
-                <p>申請完了</p>
+                <p>完了</p>
                     <a href='{{ route('books.index') }}'>書籍一覧へ戻る</a>
                 </div>
             </div>
