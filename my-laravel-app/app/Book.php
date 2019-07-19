@@ -35,32 +35,17 @@ class Book extends Model
 
         // CSVヘッダとテーブルのカラムを関連付けておく
         $list = [
-            'title' => "title"
+            'title' => "title",
+            'title_kana' => "title_kana",
+            'subtitle' => "subtitle",
+            'subtitle_kana' => "subtitle_kana",
+            'isbn' => "isbn",
+            'author' => "author",
+            'author_kana' => "author_kana",
+            'publisher' => "publisher",
+            'url' => "url",
         ];
-
-        // _id
-        // parent_id
-        // title
-        // title_kana
-        // subtitle
-        // subtitle_kana
-        // isbn
-        // author
-        // author_kana
-        // publisher
-        // size
-        // series
-        // series_kana
-        // sales_date
-        // price
-        // url
-        // aff_url
-        // bdate
-        // sd_conv
-        // inmode
-        // c_dtm
-        // memo
-
+        
         foreach ($list as $key => $value) {
             // dd($key, $value);
             if ($header === $value) {
