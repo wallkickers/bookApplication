@@ -13,7 +13,15 @@ class Book extends Model
      * @var array
      */
     protected $fillable = [
-        'book_name'
+        'book_name', 
+        'title_kana', 
+        'subtitle', 
+        'subtitle_kana', 
+        'isbn', 
+        'author', 
+        'author_kana', 
+        'publisher', 
+        'url', 
     ];
 
     /**
@@ -25,17 +33,10 @@ class Book extends Model
      */
     public static function retrieveTestColumnsByValue(string $header ,string $encoding)
     {
-        // $a = "aaaaaa\taa,b";
-        // $c = explode("\t", $a);
-        // dd($a, $c);
-        // dd($header);
-        // $headers = explode("\t", $header);
-
-        // dd($header);
 
         // CSVヘッダとテーブルのカラムを関連付けておく
         $list = [
-            'title' => "title",
+            'book_name' => "title",
             'title_kana' => "title_kana",
             'subtitle' => "subtitle",
             'subtitle_kana' => "subtitle_kana",
@@ -47,17 +48,10 @@ class Book extends Model
         ];
         
         foreach ($list as $key => $value) {
-            // dd($key, $value);
             if ($header === $value) {
                 return $key;
             }
-
-            // if ($headers[$key] === mb_convert_encoding($value, $encoding)) {
-            //     dd($key);
-            //     return $key;
-            // }
         }
         return null;
-        // return 'title';
     }
 }
