@@ -50,9 +50,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::get('/form', 'CsvImportController@create')->name('admin.form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('admin.import');
+
+    Route::resource('books', 'Admin\BookController');
 });
 
-Route::get('/logout',[
-    'uses' => 'LoginController@getLogout',
-    'as' => 'user.logout'
-    ]);
+// Route::get('/logout',[
+//     'uses' => 'LoginController@getLogout',
+//     'as' => 'user.logout'
+//     ]);
