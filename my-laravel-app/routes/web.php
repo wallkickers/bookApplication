@@ -31,8 +31,15 @@ Route::group(['middleware' => 'auth:user'], function(){
     Route::resource('application', 'ApplicationController');
 });
 
+// ログイン状態の場合
+Route::group(['middleware' => 'auth:guest'], function(){
+    // Route::get('/',         function () { return redirect('/admin/home'); });
+    // Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
+    // Route::post('login',    'Admin\LoginController@login');
+});
+
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('/',         'Admin\HomeController@index')->name('admin.index');
     Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login',    'Admin\LoginController@login');
 });
@@ -41,11 +48,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
     Route::get('home',      'Admin\HomeController@index')->name('admin.home');
 
-    Route::get('/form', function () { return view('form'); });
-    Route::post('form/import-csv', 'CsvImportController@store');
+    Route::get('/form', 'CsvImportController@create')->name('admin.form');
+    Route::post('form/import-csv', 'CsvImportController@store')->name('admin.import');
 });
 
-// Route::get('/logout',[
-//     'uses' => 'UserController@getLogout',
-//     'as' => 'user.logout'
-//     ]);
+Route::get('/logout',[
+    'uses' => 'LoginController@getLogout',
+    'as' => 'user.logout'
+    ]);
