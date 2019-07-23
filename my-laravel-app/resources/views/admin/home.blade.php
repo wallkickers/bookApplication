@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">利用ユーザー一覧</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
 
                     <table border="1" width="100%">
                         <tr>
@@ -21,15 +20,11 @@
                           <th>名前</th>
                           <th>貸し出し状況</th>
                         </tr>
-                        @foreach ($books as $book)
+                        @foreach ($users as $user)
                         <tr>
-                          <td>{{ $book->id }}</td>
-                          <td><a href='{{ route('books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
-                          @if ($book->user_id)
-                          <td>貸し出し中</td>
-                          @else
-                          <td>-</td>
-                          @endif
+                          <td>{{ $user->id }}</td>
+                          <td>{{ $user->name }}</td>
+                          <td>{{ $user->hasBooksNum() }}</td>
                         </tr>
                         @endforeach
                     </table>
