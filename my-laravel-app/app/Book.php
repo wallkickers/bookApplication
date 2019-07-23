@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Book extends Model
 {
@@ -53,5 +54,11 @@ class Book extends Model
             }
         }
         return null;
+    }
+
+    public function hasUserName(){
+        $userId = $this->user_id;
+        $userName = User::find($userId)->name;
+        return $userName;
     }
 }
