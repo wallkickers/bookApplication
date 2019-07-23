@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex-center position-ref full-height">
         <div class="content">
-            <p>WELCOME TO BookMark</p>
+            <p>WELCOME To BookMark</p>
             <a href='{{ route('books.index') }}'>はじめる</a>
         </div>
 </div>
