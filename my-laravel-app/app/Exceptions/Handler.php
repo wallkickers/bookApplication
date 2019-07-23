@@ -8,6 +8,13 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    /**
+     * 認証していない場合にガードを見てそれぞれのログインページへ飛ばず
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
     public function unauthenticated($request, AuthenticationException $exception)
     {
         if($request->expectsJson()){

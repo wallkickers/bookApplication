@@ -23,4 +23,15 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
+
+    private function getRedirectPath($guard)
+    {
+        $path = '/';
+        if($guard) {
+            if ($guard == 'admin') {
+                $path = '/admin';
+            }
+        }
+        return $path;
+    }
 }
