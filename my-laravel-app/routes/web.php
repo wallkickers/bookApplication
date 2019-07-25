@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth:user'], function(){
     Route::resource('users', 'UserController');
     Route::resource('books', 'BookController');
+    Route::post('books/search', 'BookController@search')->name('books.search');
     Route::resource('application', 'ApplicationController');
 });
 
@@ -44,14 +45,14 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('login',    'Admin\LoginController@login');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
-    Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
-    Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function() {
+    Route::post('logout',   'LoginController@logout')->name('admin.logout');
+    Route::get('home',      'HomeController@index')->name('admin.home');
 
     Route::get('/form', 'CsvImportController@create')->name('admin.form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('admin.import');
 
-    Route::resource('books', 'Admin\BookController');
+    Route::resource('books', 'BookController');
 });
 
 // Route::get('/logout',[

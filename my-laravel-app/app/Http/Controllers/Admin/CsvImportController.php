@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +10,11 @@ use App\Book;
 
 class CsvImportController extends Controller
 {
+    public function create(){
+        return view('admin.form');
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -18,13 +23,6 @@ class CsvImportController extends Controller
      */
     public function store(Request $request)
     {
-        // // アップロードファイルに対してのバリデート
-        // $validator = $this->validateUploadFile($request);
-
-        // if ($validator->fails() === true){
-        //     return redirect('/form')->with('message', $validator->errors()->first('csv_file'));
-        // }
-
         // CSVファイルをサーバーに保存
         $temporary_csv_file = $request->file('csv_file')->store('csv');
 
@@ -35,9 +33,9 @@ class CsvImportController extends Controller
         $headers = explode("\t", $headers[0]);
 
         // dd($headers);
+        
+        // booksのカラムと一致する列名のみ取り出す
         $column_names = [];
-
-        // CSVヘッダ確認
         foreach ($headers as $header) {
             $result = Book::retrieveTestColumnsByValue($header, 'SJIS-win');
             // if ($result === null) {
@@ -53,43 +51,59 @@ class CsvImportController extends Controller
 
         $registration_errors_list = [];
         $update_errors_list       = [];
+
+        // 登録するデータが入る配列
         $registration_csv_list    = [];
         $i = 0;
 
-        // TODO:サイズが大きいCSVファイルを読み込む場合、この処理ではメモリ不足になる可能性がある為改修が必要になる
-        while ($row = fgetcsv($fp)) {
-            $rows = explode("\t", $row[0]);
+        // $row = fgetcsv($fp);
+        // dd($row);
 
-            // Excelで編集されるのが多いと思うのでSJIS-win→UTF-8へエンコード
-            // dat_book.csv はもともとUTF-8なので下記の変更は不必要
-            // mb_convert_variables('UTF-8', 'SJIS-win', $row);
-            // $is_registration_row = false;
+        while (($data = fgetcsv($fp, 1000, ",")) !== FALSE) {
 
-            foreach ($column_names as $column_no => $column_name) {
-                // dd($column_names, $column_no, $column_name, $rows,$rows[$column_no]);
-                if ($column_name !== null) {
-                    $registration_csv_list[$i][$column_name] = $rows[$column_no];
+            $data = explode("\t", $data[0]);
+            $num = count($data);
+
+            for ($c=0; $c < $num; $c++) {
+                if(!is_null($column_names[$c])){
+                    $registration_csv_list[$i][$column_names[$c]] = $data[$c];
                 }
             }
-            // dd($registration_csv_list);
-
-            // // バリデーションチェック
-            // $validator = \Validator::make(
-            //     $is_registration_row === true ? $registration_csv_list[$i] : $update_csv_list[$i],
-            //     $this->defineValidationRules(),
-            //     $this->defineValidationMessages()
-            // );
-
-            // if ($validator->fails() === true) {
-            //     if ($is_registration_row === true) {
-            //         $registration_errors_list[$i + 2] = $validator->errors()->all();
-            //     } else {
-            //         $update_errors_list[$i + 2] = $validator->errors()->all();
-            //     }
-            // }
-
             $i++;
         }
+        fclose($fp);
+
+
+        // TODO: サイズが大きいCSVファイルを読み込む場合、この処理ではメモリ不足になる可能性がある為改修が必要
+        // for($i=0; $i<2; $i++)
+        // while (($row = fgetcsv($fp, 1000, ",")) !== FALSE) {
+        //     // 入力値の列を読み込む
+        //     $rows = explode("\t", $row[0]);
+
+        //     // dd($rows[9]);
+
+        //     // Tips: 文字コードの変換が必要な場合
+        //     // Excelで編集されるのが多いと思うのでSJIS-win→UTF-8へエンコード
+        //     // dat_book.csv はもともとUTF-8なので下記の変更は不必要
+        //     // mb_convert_variables('UTF-8', 'SJIS-win', $row);
+        //     // $is_registration_row = false;
+
+        //     // dd($column_names, $rows);
+
+        //     foreach ($column_names as $column_no => $column_name) {
+        //         if (!is_null($column_name)) {
+        //         //    if ($column_no == 10) {
+        //         //         var_dump($rows[$column_no]);
+        //         //         $registration_csv_list[$i][$column_name] = $rows[$column_no];
+        //         //         dd($column_no, $rows[$column_no]);
+
+        //         //     }
+        //             $registration_csv_list[$i][$column_name] = $rows[$column_no];
+        //         }
+        //     }
+        //     dd($registration_csv_list);
+        //     $i++;
+        // }
 
         // dd($registration_csv_list);
 
@@ -110,21 +124,16 @@ class CsvImportController extends Controller
         //     }
         // }
 
+        // $book = new Book();
+        // $book->fill($registration_csv_list);
+        // $book->save();
+
+        // DB登録
         foreach ($registration_csv_list as $key => $value) {
             $book = new Book();
-            $book->fill(['book_name' => $value['title']]);
+            $book -> fill($value);
             $book->save();
         }
-
-        // // 新規登録処理
-        // if (isset($registration_csv_list) === true) {
-        //     foreach ($registration_csv_list as $registration_csv) {
-        //         // 登録処理
-        //         if ($this->fill($registration_csv)->save() === false) {
-        //             return redirect('/form')->with('message', '新規登録処理に失敗しました。');
-        //         }
-        //     }
-        // }
 
         return redirect('/form')->with('message', 'CSV登録が完了しました。' );
     }

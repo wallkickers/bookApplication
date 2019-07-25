@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">書籍一覧</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,6 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    <form method="POST" action="{{ route('books.search') }}">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="keyword" class="form" placeholder="カタカナ検索">
+                            <button type="submit" value="検索" class="">検索</button>
+                        </div>
+                    </form>
 
                     <table border="1" width="100%">
                         <tr>

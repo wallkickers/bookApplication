@@ -14,12 +14,6 @@
                         </div>
                     @endif
 
-                    {{-- <form class="form-inline" action="">
-                        <div class="form-group">
-                            <input type="text" name="keyword" class="form-control" placeholder="カタカナ検索">
-                        </div>
-                        <input type="submit" value="検索" class="">
-                    </form> --}}
 
                     <table border="1" width="100%">
                         <tr>
