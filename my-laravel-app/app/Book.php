@@ -56,9 +56,17 @@ class Book extends Model
         return null;
     }
 
+    /*
+    書籍を借りている人の名前を返却
+    */
     public function hasUserName(){
-        $userId = $this->user_id;
-        $userName = User::find($userId)->name;
-        return $userName;
+        if ($this->user_id) {
+            $userId = $this->user_id;
+            $userName = User::find($userId)->name;
+            return $userName;
+        } else {
+            return null;
+        }
+
     }
 }

@@ -56,7 +56,7 @@
                           @endif
                         </tr>
                     </table>
-                    @if (is_null($book->hasUserName()))
+                    @if (!is_null($book->hasUserName()))
                       <p>借りているユーザー：{{ $book->hasUserName() }}</p>
                     @endif
                 </div>
