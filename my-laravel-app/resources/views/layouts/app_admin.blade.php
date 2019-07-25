@@ -62,6 +62,7 @@
                                         <a class="dropdown-item" href="{{ route('admin.books.index') }}">
                                             書籍一覧
                                         </a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
