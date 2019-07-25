@@ -15,11 +15,11 @@
                             <button type="submit">インポート</button>
                         </form>
 
-                        {{-- @if(Session::has('message'))
-                        メッセージ：{{ session('message') }}
+                        @if(Session::has('message'))
+                        {{ session('message') }}
                         @endif
                         
-                        @if (is_array($errors))
+                        {{-- @if (is_array($errors))
                         <div class="flushComment">
                             ・CSVインポートエラーが発生しました。以下の内容を確認してください。<br>
                             @if (count($errors['registration_errors']) > 0)

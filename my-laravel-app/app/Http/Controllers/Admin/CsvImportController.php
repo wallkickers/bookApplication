@@ -135,7 +135,7 @@ class CsvImportController extends Controller
             $book->save();
         }
 
-        return redirect('/form')->with('message', 'CSV登録が完了しました。' );
+        return redirect(route('admin.form'))->with('message', 'CSV登録が完了しました。' );
     }
 
     /**
