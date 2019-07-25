@@ -24,12 +24,12 @@
                         @foreach ($books as $book)
                         <tr>
                           <td>{{ $book->id }}</td>
-                          <td><a href='{{ route('books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
+                          <td><a href='{{ route('admin.books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
                           @if ($book->user_id)
                           <td>貸し出し中</td>
                           @else
                           <td>
-                          <form method="POST" name='deleteBook' action='{{ route('books.destroy', ['book' => $book->id])}}'>
+                          <form method="POST" name='deleteBook' action='{{ route('admin.books.destroy', ['book' => $book->id])}}'>
                             @csrf
                             @method('DELETE')
                             <button type="submit">削除</button>

@@ -46,11 +46,11 @@ Route::group(['prefix' => 'admin'], function() {
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function() {
-    Route::post('logout',   'LoginController@logout')->name('admin.logout');
-    Route::get('home',      'HomeController@index')->name('admin.home');
+    Route::post('logout',   'LoginController@logout')->name('logout');
+    Route::get('home',      'HomeController@index')->name('home');
 
-    Route::get('/form', 'CsvImportController@create')->name('admin.form');
-    Route::post('form/import-csv', 'CsvImportController@store')->name('admin.import');
+    Route::get('/form', 'CsvImportController@create')->name('form');
+    Route::post('form/import-csv', 'CsvImportController@store')->name('import');
 
     Route::resource('books', 'BookController');
 });
