@@ -14,24 +14,20 @@ class BookController extends Controller
 {
     public function search(Request $request)
     {
-        if(isset($request->keyword)){
-            $keyword = $request->keyword;
-            $query = Book::query();
-            $searchedBooks = $query
-                ->where('title_kana', 'LIKE', "%".$keyword."%")
-                ->get();
-
-            return view('book.home')->with([
-                'books' => $searchedBooks
-            ]);
-        }else{
-            Redirect::route('books.index');
-        }
+        $keyword = $request->keyword;
+        $query = Book::query();
+        $searchedBooks = $query
+            ->where('title_kana', 'LIKE', "%".$keyword."%")
+            ->paginate(config('app.pagesize'));
+        return view('book.home')->with([
+            'books' => $searchedBooks
+        ]);
+     
     }
 
     public function index()
     {
-        $books = Book::all();
+        $books = Book::paginate(config('app.pagesize'));
         
         return view('book.home')->with([
             'books' => $books
