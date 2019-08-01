@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">貸し出し中書籍一覧</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <table border="1" width="100%">
+                    <table class='table'>
                         <tr>
                           <th>書籍番号</th>
                           <th>名前</th>

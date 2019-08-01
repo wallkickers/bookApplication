@@ -5,20 +5,31 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">書籍貸し出し申請</div>
 
-                <div class="card-body">
+                <div class="card-body center">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
-                
-                <p>書籍名：{{ $book->book_name }}</p>
+
+                    <table class='table'>
+                        <tr>
+                          <td>書籍名</td>
+                          <td>{{ $book->book_name }}</td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                    </table>
 
                 <form action='{{ route('application.store', ['book' => $book->id]) }}' method='POST'>
                     @csrf
-                    <button type="submit">申請</button>
+                    <div class="button_wrapper">
+                        <button type="submit" class='btn-sticky center'>申請</button>
+                    </div>
                 </form>
                 </div>
             </div>

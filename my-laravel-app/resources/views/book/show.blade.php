@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <table border="1" width="100%">
+                    <table class='table'>
                         <tr>
                           <td>書籍名</td>
                           <td>{{ $book->book_name }}</td>
@@ -58,14 +58,18 @@
                     </table>
 
                 @if (!isset($book->user_id))
-                    <p><a href='{{ route('application.create', ['book' => $book->id]) }}'>貸し出し申請</p>
+                <div class='center'>
+                    <a href='{{ route('application.create', ['book' => $book->id]) }}' class='btn-sticky'>貸し出し申請</a>
+                </div>
                 @endif
 
                 @if ($book->user_id == $user->id)
                 <form action='{{ route('application.destroy', ['application' => $book->id]) }}' method='POST'>
                     @method('DELETE')
                     @csrf
-                    <button type="submit">返却</button>
+                    <div class="button_wrapper">
+                        <button type="submit" class='btn-sticky'>返却</button>
+                    </div>
                 </form>
                 @endif
                 </div>
