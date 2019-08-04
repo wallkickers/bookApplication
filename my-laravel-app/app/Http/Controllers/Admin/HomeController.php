@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(config('app.pagesize'));
         return view('admin.home', ['users' => $users]);
     }
 }

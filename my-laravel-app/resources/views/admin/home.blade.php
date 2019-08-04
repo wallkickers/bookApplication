@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <table border="1" width="100%">
+                    <table class="table">
                         <tr>
                           <th>書籍番号</th>
                           <th>名前</th>
@@ -28,6 +28,7 @@
                         </tr>
                         @endforeach
                     </table>
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

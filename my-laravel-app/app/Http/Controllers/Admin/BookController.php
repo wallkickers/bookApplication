@@ -13,8 +13,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
-
+        $books = Book::paginate(config('app.pagesize'));;
         return view('admin.book.index')->with([
             'books' => $books
         ]);

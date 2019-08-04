@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <table border="1" width="100%">
+                    <table class="table">
                         <tr>
                           <td>書籍名</td>
                           <td>{{ $book->book_name }}</td>
