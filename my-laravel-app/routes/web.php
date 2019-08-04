@@ -11,16 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::resource('sample', 'Controller', ['only' => ['index']]);
-
-// Route::resource('test', 'TestController');
-
-// Route::apiResource('api/posts', 'PostController');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -32,12 +22,6 @@ Route::group(['middleware' => 'auth:user'], function(){
     Route::resource('application', 'ApplicationController');
 });
 
-// ログイン状態の場合
-Route::group(['middleware' => 'auth:guest'], function(){
-    // Route::get('/',         function () { return redirect('/admin/home'); });
-    // Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
-    // Route::post('login',    'Admin\LoginController@login');
-});
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/',         'Admin\HomeController@index')->name('admin.index');
@@ -55,7 +39,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::resource('books', 'BookController');
 });
 
-// Route::get('/logout',[
-//     'uses' => 'LoginController@getLogout',
-//     'as' => 'user.logout'
-//     ]);
