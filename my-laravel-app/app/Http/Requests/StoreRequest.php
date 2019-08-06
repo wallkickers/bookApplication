@@ -13,6 +13,9 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
+        if (!session()->has('isAdmin')) {
+            return true;
+        }
         return false;
     }
 
@@ -24,7 +27,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'csv_file' => 'required|file|mimetypes:text/plain|mimes:csv,txt',
+            'csv_file' => 'required|file|mimetypes:text/csv,application/vnd.ms-excel,text/plain,text/tsv',
         ];
     }
 
@@ -34,7 +37,6 @@ class StoreRequest extends FormRequest
             'csv_file.required'  => 'ファイルを選択してください。',
             'csv_file.file'      => 'ファイルアップロードに失敗しました。',
             'csv_file.mimetypes' => 'ファイル形式が不正です。',
-            'csv_file.mimes'     => 'ファイル拡張子が異なります。',
         ];
     }
 
