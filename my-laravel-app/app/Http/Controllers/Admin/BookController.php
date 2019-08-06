@@ -13,7 +13,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::paginate(config('app.pagesize'));;
+        $books = Book::paginate(config('app.pagesize'));
         return view('admin.book.index')->with([
             'books' => $books
         ]);
@@ -37,7 +37,7 @@ class BookController extends Controller
         $deleteBook = Book::find($bookId);
         $deleteBook->delete();
 
-        $books = Book::all();
+        $books = Book::paginate(config('app.pagesize'));
 
         return view('admin.book.index')->with([
             'books' => $books
