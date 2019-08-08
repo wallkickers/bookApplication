@@ -36,7 +36,7 @@ class ApplicationController extends Controller
 
         $initialMemory2 = memory_get_usage();
 
-        \Slack::send('貸し出し申請がありました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
+        // \Slack::send('貸し出し申請がありました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
 
         $runningTime =  microtime(true) - $startTime;
         $usedMemory = (memory_get_peak_usage() - $initialMemory) / (1024 * 1024);
