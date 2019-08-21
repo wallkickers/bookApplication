@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:user'], function(){
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/',         'Admin\UserController@index')->name('admin.index');
+    Route::post('users/search', 'Admin\UserController@search')->name('users.search');
     Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login',    'Admin\LoginController@login');
 });

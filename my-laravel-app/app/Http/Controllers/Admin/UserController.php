@@ -19,17 +19,14 @@ class UserController extends Controller
         $this->middleware('auth:admin');
     }
 
-    // TODO: 未実装
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $query = Book::query();
-        $searchedBooks = $query
-            ->where('title_kana', 'LIKE', "%".$keyword."%")
+        $query = User::query();
+        $searchedUsers = $query
+            ->where('name', 'LIKE', "%".$keyword."%")
             ->paginate(config('app.pagesize'));
-        return view('book.home')->with([
-            'books' => $searchedBooks
-        ]);
+            return view('admin.home', ['users' => $searchedUsers]);
     }
 
     public function index()

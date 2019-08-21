@@ -14,6 +14,14 @@
                         </div>
                     @endif
 
+                    <form method="POST" action="{{ route('users.search') }}">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" name="keyword" class="form" placeholder="名前検索">
+                            <button type="submit" value="検索" class="">検索</button>
+                        </div>
+                    </form>
+
                     <table class="table">
                         <tr>
                           <th>書籍番号</th>
