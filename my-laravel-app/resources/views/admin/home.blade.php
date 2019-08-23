@@ -27,12 +27,26 @@
                           <th>書籍番号</th>
                           <th>名前</th>
                           <th>貸し出し状況</th>
+                          <th>削除</th>
                         </tr>
                         @foreach ($users as $user)
                         <tr>
                           <td>{{ $user->id }}</td>
-                          <td>{{ $user->name }}</td>
+                          <td><a href='{{ route('admin.user.show', ['user' => $user->id]) }}'>{{ $user->name }}</td>
                           <td>{{ $user->hasBooksNum() }}</td>
+                          @if ($user->hasBooksNum() === 0)
+                          <td>
+                            <form method="POST" name='deleteUser' action='{{ route('admin.user.destroy', ['user' => $user->id])}}'>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit">削除</button>
+                            </form>
+                          </td>
+                          @else
+                          <td>
+                              -
+                          </td>
+                          @endif
                         </tr>
                         @endforeach
                     </table>
