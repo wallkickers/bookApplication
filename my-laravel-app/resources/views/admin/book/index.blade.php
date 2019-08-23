@@ -20,6 +20,7 @@
                           <th>書籍番号</th>
                           <th>名前</th>
                           <th>貸し出し状況</th>
+                          <th>削除</th>
                         </tr>
                         @foreach ($books as $book)
                         <tr>
@@ -27,14 +28,16 @@
                           <td><a href='{{ route('admin.books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
                           @if ($book->user_id)
                           <td>貸し出し中</td>
+                          <td>-</td>
                           @else
+                          <td>-</td>
                           <td>
-                          <form method="POST" name='deleteBook' action='{{ route('admin.books.destroy', ['book' => $book->id])}}'>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">削除</button>
-                          </form>
-                        </td>
+                            <form method="POST" name='deleteBook' action='{{ route('admin.books.destroy', ['book' => $book->id])}}'>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit">削除</button>
+                            </form>
+                          </td>
                           @endif
                         </tr>
                         @endforeach
