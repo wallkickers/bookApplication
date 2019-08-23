@@ -35,17 +35,26 @@ class UserController extends Controller
         return view('admin.home', ['users' => $users]);
     }
 
-    // TODO: 未実装
-    public function destroy(Request $request)
+    public function show(Request $request)
     {
-        $bookId = $request->book;
-        $deleteBook = Book::find($bookId);
-        $deleteBook->delete();
+        $user = Auth::user();
+        $userId = $request->user;
+        $selectedUser = User::where('id', $userId)->first();
+        $books = $selectedUser->books()->get();
 
-        $books = Book::paginate(config('app.pagesize'));
-
-        return view('admin.book.index')->with([
+        return view('admin.user.show',[
+            'user' => $user,
+            'selectedUser' => $selectedUser,
             'books' => $books
         ]);
+    }
+
+    public function destroy(Request $request)
+    {
+        $userId = $request->user;
+        $deleteUser = User::find($userId);
+        $deleteUser->delete();
+        $users = User::paginate(config('app.pagesize'));
+        return view('admin.home', ['users' => $users]);
     }
 }

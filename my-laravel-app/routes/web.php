@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:user'], function(){
 
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/',         'Admin\UserController@index')->name('admin.index');
+    Route::get('/users/{user}', 'Admin\UserController@show')->name('admin.user.show');
+    Route::delete('/users/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
     Route::post('users/search', 'Admin\UserController@search')->name('users.search');
     Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login',    'Admin\LoginController@login');
@@ -32,8 +34,6 @@ Route::group(['prefix' => 'admin'], function() {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function() {
     Route::post('logout',   'LoginController@logout')->name('logout');
-    Route::get('home',      'HomeController@index')->name('home');
-
     Route::get('/form', 'CsvImportController@create')->name('form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('import');
 
