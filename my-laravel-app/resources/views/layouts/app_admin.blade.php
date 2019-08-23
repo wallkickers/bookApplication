@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/admin/home') }}">
+                <a class="navbar-brand" href="{{ url('/admin') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -53,6 +53,9 @@
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('admin.form') }}">
                                             Import
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                            利用ユーザー一覧
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.books.index') }}">
                                             書籍一覧
