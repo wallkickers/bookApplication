@@ -38,9 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function books(){
+        return $this->hasMany('App\Book');
+    }
+
     public function hasBooksNum(){
-        $userId = $this->id;
-        $books = Book::where('user_id', $userId)->get();
-        return count($books);
+        return count($this->books()->get());
     }
 }

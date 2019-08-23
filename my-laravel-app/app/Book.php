@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Book extends Model
 {
@@ -54,6 +55,13 @@ class Book extends Model
             }
         }
         return null;
+    }
+
+    /*
+    書籍を借りている人のUserモデルを返却
+    */
+    public function user(){
+        return belongsTo('App\User');
     }
 
     /*
