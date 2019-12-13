@@ -3,9 +3,8 @@ FROM amazonlinux:2
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 # 依存パッケージのインストール
-RUN amazon-linux-extras install nginx1.12 && \
-    amazon-linux-extras install php7.2 && \
-    amazon-linux-extras install lamp-mariadb10.2-php7.2 && \
+RUN amazon-linux-extras install nginx1 && \
+    amazon-linux-extras install php7.3 && \
     yum -y install zip unzip php-devel php-pear php-mbstring php-xml glibc-langpack-ja npm sudo ccze gcc vim procps libpng-devel git cronie
 
 RUN npm install -g rtail && pecl install xdebug
