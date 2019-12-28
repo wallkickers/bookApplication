@@ -37,6 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::get('/form', 'CsvImportController@create')->name('form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('import');
     Route::get('/pdf', 'PdfController@show')->name('book_pdf');
+    Route::get('/slack', 'SlackController@index')->name('slack');
+    Route::post('/slack/update', 'SlackController@update')->name('slack.update');
 
     Route::resource('books', 'BookController');
 });
