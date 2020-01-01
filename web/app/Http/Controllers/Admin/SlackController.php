@@ -26,7 +26,7 @@ class SlackController extends Controller
         $slack = slack::find(1);
         $slack->update($request->all());
 
-        return view('admin.slack.slack')
+        return redirect(route('admin.slack'))
         ->with([
             'slack' => $slack,
             'message' => "更新が完了しました。",
