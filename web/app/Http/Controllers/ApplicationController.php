@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
 use App\RentalHistory;
-use Faker\Provider\zh_TW\DateTime;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx as Reader;
 use Carbon\Carbon;
 
 class ApplicationController extends Controller
@@ -29,36 +27,35 @@ class ApplicationController extends Controller
     {
         $user = Auth::user();
         $bookId = $request->book;
+
+        // booksテーブルの所有者をuser_idで更新
         $book = Book::where('id', $bookId)->first();
         $book->user_id = $user->id;
         $book->save();
 
-        // 貸出履歴としてrental_hitoryテーブルにレコード追加
-        $rentalHistory = RentalHistory::create(['book_id' => $bookId]);
+        // 貸出時にrental_hitoryテーブルを追加
+        RentalHistory::create(['book_id' => $bookId])->save();
 
         \Slack::send('貸し出し申請がありました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
-        return view('application.complete');
+        return view('application.complete')->with(['message'=>'貸し出し完了']);
     }
 
     public function destroy(Request $request)
     {
         $user = Auth::user();
         $bookId = $request->application;
-        $book = Book::where('id', $bookId)->first();
+
+        // booksテーブルの所有者をnullで更新
+        $book = Book::find($bookId)->first();
         $book->user_id = null;
         $book->save();
 
-        // 返却履歴としてrental_hitoryテーブルにレコード追加
+        // 返却時に該当のrental_hitoryテーブルを更新
         $rentalHistory = RentalHistory::where(['book_id' => $bookId, 'return_date' => null])->first();
-
-        // TODO: 返却日時を入れようとすると、更新ではなく、レコードが追加されてしまう。
-        // TODO: 現在の日時がtimestampになっているのか。
-        // TODO: タイムゾーンの設定
-        dd($rentalHistory);
-        $rentalHistory->return_date = Carbon::now();
-        $rentalHistory->save();
+        $nowDateTime = Carbon::now()->toDateTimeString();
+        $rentalHistory->update(['return_date' => $nowDateTime]);
 
         \Slack::send('本が返却されました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
-        return view('application.complete');
+        return view('application.complete')->with(['message'=>'返却完了']);;
     }    
 }
