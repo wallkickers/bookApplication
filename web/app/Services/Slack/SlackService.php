@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Slack;
 
+use App\Slack;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\SlackNotification;
 
@@ -15,6 +16,8 @@ class SlackService
 
     protected function routeNotificationForSlack()
     {
-        return env('SLACK_URL');
+        $slack = Slack::find(1);
+        $slack_url = $slack->url ?? env('SLACK_URL');
+        return $slack_url;
     }
 }

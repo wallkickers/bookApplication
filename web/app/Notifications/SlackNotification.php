@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Slack;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,9 +46,14 @@ class SlackNotification extends Notification
      */
     public function toSlack($notifiable)
     {
+        $slack = Slack::find(1);
+        $slack_name = $slack->name ?? env('SLACK_USERNAME');
+        $slack_icon = $slack->icon ?? env('SLACK_ICON');
+        $slack_channel = $slack->channel ?? env('SLACK_CHANNEL');
+
         $message = (new SlackMessage)
-            ->from(env('SLACK_USERNAME'), env('SLACK_ICON'))
-            ->to(env('SLACK_CHANNEL'))
+            ->from($slack_name, $slack_icon)
+            ->to($slack_channel)
             ->content($this->message);
 
         if (!is_null($this->attachment) && is_array($this->attachment)) {
