@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">書籍貸し出し申請</div>
+                <div class="card-header">書籍申請</div>
 
                 <div class="card-body center">
                     @if (session('status'))
