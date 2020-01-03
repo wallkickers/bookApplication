@@ -33,10 +33,9 @@ class Book extends Model
      * @param string $encoding
      * @return string|null
      */
-    public static function retrieveTestColumnsByValue(string $header ,string $encoding)
+    public static function retrieveBookColumnsByValue(string $header)
     {
-
-        // CSVヘッダとテーブルのカラムを関連付けておく
+        // CSVファイルのヘッダとテーブルカラムの関連付け
         $list = [
             'book_name' => "title",
             'title_kana' => "title_kana",
@@ -75,6 +74,5 @@ class Book extends Model
         } else {
             return null;
         }
-
     }
 }

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">書籍一覧<a href='{{ route('admin.book_pdf') }}'> PDF出力</a></div>
+                <div class="card-header">書籍一覧</div>
 
                 <div class="card-body">
                     @if (session('status'))
