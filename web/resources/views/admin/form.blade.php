@@ -14,6 +14,9 @@
                             @csrf
                             <button type="submit">インポート</button>
                     </form>
+                    @if (session('message'))
+                        <div class="">{{ session('message') }}</div>
+                    @endif
                     @error('csv_file')
                         <div class="">{{ $message }}</div>
                     @enderror
