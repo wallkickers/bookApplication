@@ -32,7 +32,7 @@ class InitialDataSeeder extends Seeder
                 'name' => 'applicationNotification',
                 'icon' => ':fire:',
                 'channel' => 'slack_with_you',
-                'url' => 'https://hooks.slack.com/services/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'
+                'url' => 'https://hooks.slack.com/services/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'
             ]
         );
     }

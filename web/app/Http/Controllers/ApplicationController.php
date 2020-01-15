@@ -32,9 +32,10 @@ class ApplicationController extends Controller
         $book = Book::where('id', $bookId)->first();
         $book->user_id = $user->id;
         $book->save();
+        $nowDateTime = Carbon::now()->toDateTimeString();
 
         // 貸出時にrental_hitoryテーブルを追加
-        RentalHistory::create(['book_id' => $bookId])->save();
+        RentalHistory::create(['book_id' => $bookId, 'rental_date' => $nowDateTime])->save();
 
         \Slack::send('貸し出し申請がありました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
         return view('application.complete')->with(['message'=>'貸し出し完了']);
