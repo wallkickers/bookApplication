@@ -20,34 +20,4 @@
 　
 ## 構築方法
 
-```
-※環境構築にはDockerが必要です。
-
-// App用ディレクトリ作成
-git clone https://github.com/wallkickers/bookApplication.git
-cd bookApplication/env
-
-// dockerコンテナ「web」「env」の作成
-docker-compose up -d
-docker-compose exec web bash
-composer install
-
-// envファイル生成
-cp .env.example .env
-php artisan key:generate
-
-// envファイル内にDB情報を記述
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_DATABASE=bookMark
-DB_USERNAME=root
-DB_PASSWORD=password
-
-// DBの構築&初期データ作成
-php artisan migrate
-php artisan db:seed
-
-// ブラウザで接続
-http://localhost:10080
-```
-
+準備中です。
