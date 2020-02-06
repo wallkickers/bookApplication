@@ -19,5 +19,34 @@
 `$ git clone https://github.com/wallkickers/bookApplication.git`  
 　
 ## 構築方法
+```
+※環境構築にはDockerを使用します。
 
-準備中です。
+// App用ディレクトリ作成（コマンド）
+git clone https://github.com/wallkickers/bookApplication.git
+cd bookApplication/env
+
+// dockerコンテナ「web」「env」の作成（コマンド）
+docker-compose up -d
+docker-compose exec web bash
+export COMPOSER_PROCESS_TIMEOUT=1200
+composer install
+
+// envファイル生成（コマンド）
+cp .env.example .env
+php artisan key:generate
+
+// envファイル内にDB情報を記述：作成した.envファイルの該当箇所を書き換える
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_DATABASE=bookMark
+DB_USERNAME=root
+DB_PASSWORD=password
+
+// DBの構築&初期データ作成：（コマンド）
+php artisan migrate
+php artisan db:seed
+
+// Webブラウザで接続
+http://localhost:10080
+```
