@@ -27,8 +27,9 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::paginate(config('app.pagesize'));
-        
+        $books = Book::orderBy('id', 'asc')
+            ->paginate(config('app.pagesize'));
+
         return view('book.home')->with([
             'books' => $books
         ]);
