@@ -31,7 +31,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::paginate(config('app.pagesize'));
+        $users = User::orderBy('id', 'asc')
+            ->paginate(config('app.pagesize'));
         return view('admin.home', ['users' => $users]);
     }
 
