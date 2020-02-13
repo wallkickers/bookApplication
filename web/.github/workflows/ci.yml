@@ -8,4 +8,3 @@ jobs:
     steps:
       - run: ls -la
       - run: pwd
-      - run: pwd
