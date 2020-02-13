@@ -47,7 +47,7 @@ class ApplicationController extends Controller
         $bookId = $request->application;
 
         // booksテーブルの所有者をnullで更新
-        $book = Book::find($bookId)->first();
+        $book = Book::find($bookId);
         $book->user_id = null;
         $book->save();
 
