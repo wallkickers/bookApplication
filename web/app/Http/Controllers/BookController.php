@@ -20,7 +20,8 @@ class BookController extends Controller
             ->where('title_kana', 'LIKE', "%".$keyword."%")
             ->paginate(config('app.pagesize'));
         return view('book.home')->with([
-            'books' => $searchedBooks
+            'books' => $searchedBooks,
+            'keyword' => $keyword
         ]);
      
     }
