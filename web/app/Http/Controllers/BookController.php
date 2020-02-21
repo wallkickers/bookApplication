@@ -7,16 +7,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx as Reader;
-use Illuminate\Support\Facades\Redirect;
 
 class BookController extends Controller
 {
+    private $book;
+
+    public function __construct(Book $book)
+    {
+        $this->book = $book;
+    }
+
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $query = Book::query();
-        $searchedBooks = $query
+        $searchedBooks = $this->book
             ->where('title_kana', 'LIKE', "%".$keyword."%")
             ->paginate(config('app.pagesize'));
         return view('book.home')->with([
@@ -27,7 +31,8 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::orderBy('id', 'asc')
+        $books = $this->book
+            ->orderBy('id', 'asc')
             ->paginate(config('app.pagesize'));
 
         return view('book.home')->with([
@@ -39,7 +44,8 @@ class BookController extends Controller
     {
         $user = Auth::user();
         $bookId = $request->book;
-        $book = Book::where('id', $bookId)->first();
+        $book = $this->book
+            ->find($bookId);
 
         return view('book.show',[
             'user' => $user,
