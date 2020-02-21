@@ -11,9 +11,17 @@ use App\Book;
 
 class BookController extends Controller
 {
+    private $book;
+
+    public function __construct(Book $book)
+    {
+        $this->book = $book;
+    }
+
     public function index()
     {
-        $books = Book::orderBy('id', 'asc')
+        $books = $this->book
+            ->orderBy('id', 'asc')
             ->paginate(config('app.pagesize'));
         return view('admin.book.index')->with([
             'books' => $books
@@ -24,7 +32,7 @@ class BookController extends Controller
     {
         $user = Auth::user();
         $bookId = $request->book;
-        $book = Book::where('id', $bookId)->first();
+        $book = $this->book->find($bookId);
 
         return view('admin.book.show',[
             'user' => $user,
@@ -35,13 +43,9 @@ class BookController extends Controller
     public function destroy(Request $request)
     {
         $bookId = $request->book;
-        $deleteBook = Book::find($bookId);
+        $deleteBook = $this->book->find($bookId);
         $deleteBook->delete();
 
-        $books = Book::paginate(config('app.pagesize'));
-
-        return view('admin.book.index')->with([
-            'books' => $books
-        ]);
+        return redirect()->route('admin.books.index');
     }
 }
