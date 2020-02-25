@@ -6,33 +6,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Book;
+use App\Services\User\BookService;
 
 class BookController extends Controller
 {
-    private $book;
+    private $bookService;
 
-    public function __construct(Book $book)
+    public function __construct(BookService $bookService)
     {
-        $this->book = $book;
+        $this->bookService = $bookService;
     }
 
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $searchedBooks = $this->book
-            ->where('title_kana', 'LIKE', "%".$keyword."%")
+        $searchedBooks = $this->bookService
+            ->searchByKeyword($keyword)
             ->paginate(config('app.pagesize'));
         return view('book.home')->with([
             'books' => $searchedBooks
         ]);
-     
     }
 
     public function index()
     {
-        $books = $this->book
-            ->orderBy('id', 'asc')
+        $books = $this->bookService
+            ->getAllBooksOrderByIdAsc()
             ->paginate(config('app.pagesize'));
 
         return view('book.home')->with([
@@ -44,8 +43,8 @@ class BookController extends Controller
     {
         $user = Auth::user();
         $bookId = $request->book;
-        $book = $this->book
-            ->find($bookId);
+        $book = $this->bookService
+            ->findByBookId($bookId);
 
         return view('book.show',[
             'user' => $user,
