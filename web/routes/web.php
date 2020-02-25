@@ -17,8 +17,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth:user'], function(){
     Route::resource('users', 'UserController');
-    Route::resource('books', 'BookController');
-    Route::post('books/search', 'BookController@search')->name('books.search');
+    Route::get('books', 'BookController@index')->name('books.index');
+    Route::get('books/show', 'BookController@show')->name('books.show');
+    Route::get('books/search', 'BookController@search')->name('books.search');
     Route::resource('application', 'ApplicationController');
 });
 

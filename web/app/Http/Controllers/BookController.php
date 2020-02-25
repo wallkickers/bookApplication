@@ -24,7 +24,8 @@ class BookController extends Controller
             ->searchByKeyword($keyword)
             ->paginate(config('app.pagesize'));
         return view('book.home')->with([
-            'books' => $searchedBooks
+            'books' => $searchedBooks,
+            'keyword' => $keyword
         ]);
     }
 

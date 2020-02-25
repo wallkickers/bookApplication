@@ -42,7 +42,7 @@
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('view.Login') }}</a>
                                 </li>
                             @else
                                 <li class="nav-item dropdown">
@@ -52,7 +52,7 @@
     
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('admin.form') }}">
-                                            Import
+                                            {{ __('view.ImportBook') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">
                                             利用ユーザー一覧
@@ -67,7 +67,7 @@
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('view.Logout') }}
                                         </a>
     
                                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
