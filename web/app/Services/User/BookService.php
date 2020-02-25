@@ -15,6 +15,11 @@ class BookService
         return Book::orderBy('id', 'asc');
     }
 
+    public function getAllBooksByUserId($userId)
+    {
+        return Book::where('user_id', $userId)->get();
+    }
+
     public function findByBookId($bookId)
     {
         return Book::find($bookId);
