@@ -24,4 +24,10 @@ class BookService
     {
         return Book::find($bookId);
     }
+
+    public function updateBookByParam(Book $book, $parameter=null)
+    {
+        $book->user_id = $parameter;
+        $book->save();
+    }
 }
