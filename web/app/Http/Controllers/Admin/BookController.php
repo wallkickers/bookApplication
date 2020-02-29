@@ -7,13 +7,21 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Book;
+use App\Services\Admin\BookService;
 
 class BookController extends Controller
 {
+    private $bookService;
+
+    public function __construct(BookService $bookService)
+    {
+        $this->bookService = $bookService;
+    }
+
     public function index()
     {
-        $books = Book::orderBy('id', 'asc')
+        $books = $this->bookService
+            ->getAllBooksOrderByIdAsc()
             ->paginate(config('app.pagesize'));
         return view('admin.book.index')->with([
             'books' => $books
@@ -24,7 +32,8 @@ class BookController extends Controller
     {
         $user = Auth::user();
         $bookId = $request->book;
-        $book = Book::where('id', $bookId)->first();
+        $book = $this->bookService
+            ->findByBookId($bookId);
 
         return view('admin.book.show',[
             'user' => $user,
@@ -35,13 +44,8 @@ class BookController extends Controller
     public function destroy(Request $request)
     {
         $bookId = $request->book;
-        $deleteBook = Book::find($bookId);
-        $deleteBook->delete();
-
-        $books = Book::paginate(config('app.pagesize'));
-
-        return view('admin.book.index')->with([
-            'books' => $books
-        ]);
+        $result = $this->bookService->deleteByBookId($bookId);
+        
+        return redirect()->route('admin.books.index');
     }
 }

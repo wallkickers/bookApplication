@@ -4,18 +4,24 @@ namespace App\Http\Controllers;
 
 // require 'vendor/autoload.php';
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Book;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx as Reader;
+use App\Services\User\BookService;
 
 class UserController extends Controller
 {
-    public function show(Request $request)
+    private $bookService;
+
+    public function __construct(BookService $bookService)
+    {
+        $this->bookService = $bookService;
+    }
+
+    public function show()
     {
         $user = Auth::user();
         $userId = $user->id;
-        $books = Book::where('user_id', $userId)->get();
+        $books = $this->bookService
+            ->getAllBooksByUserId($userId);
 
         return view('user.show',[
             'user' => $user,
