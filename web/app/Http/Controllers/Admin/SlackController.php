@@ -7,13 +7,20 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Slack;
+use App\Services\Slack\SlackService;
 
 class SlackController extends Controller
 {
+    private $slackService;
+
+    public function __construct(SlackService $slackService)
+    {
+        $this->slackService = $slackService;
+    }
+
     public function index()
     {
-        $slack = slack::find(1);
+        $slack = $this->slackService->find(1);
         return view('admin.slack.slack')
         ->with([
             'slack' => $slack,
@@ -23,9 +30,7 @@ class SlackController extends Controller
 
     public function update(Request $request)
     {
-        $slack = slack::find(1);
-        $slack->update($request->all());
-
+        $slack = $this->slackService->update(1, $request);
         return redirect(route('admin.slack'))
         ->with([
             'slack' => $slack,
