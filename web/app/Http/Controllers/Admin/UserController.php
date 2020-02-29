@@ -30,7 +30,10 @@ class UserController extends Controller
         $searchedUsers = $this->userService
             ->searchByKeyword($keyword)
             ->paginate(config('app.pagesize'));
-            return view('admin.home', ['users' => $searchedUsers]);
+            return view('admin.home', [
+                'users' => $searchedUsers,
+                'keyword' => $keyword
+            ]);
     }
 
     public function index()
