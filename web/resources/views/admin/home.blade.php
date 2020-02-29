@@ -14,10 +14,9 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('users.search') }}">
-                        @csrf
+                    <form method="GET" action="{{ route('users.search') }}">
                         <div class="form-group">
-                            <input type="text" name="keyword" class="form" placeholder="名前検索">
+                            <input type="text" name="keyword" @isset($keyword) value="{{$keyword}}" @endisset  class="form" placeholder="名前検索">
                             <button type="submit" value="検索" class="">検索</button>
                         </div>
                     </form>
@@ -50,7 +49,7 @@
                         </tr>
                         @endforeach
                     </table>
-                    {{ $users->links() }}
+                    {{ $users->appends(request()->input())->links() }}
                 </div>
             </div>
         </div>

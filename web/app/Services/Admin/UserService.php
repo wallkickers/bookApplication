@@ -7,7 +7,7 @@ class UserService
 {
     public function searchByKeyword($keyword)
     {
-        return User::where('title_kana', 'LIKE', "%".$keyword."%");
+        return User::where('name', 'LIKE', "%".$keyword."%");
     }
 
     public function getAllUsersOrderByIdAsc()
