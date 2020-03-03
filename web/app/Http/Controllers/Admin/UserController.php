@@ -5,33 +5,41 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Services\Admin\UserService;
 
 class UserController extends Controller
 {
+    private $userService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserService $userService)
     {
         $this->middleware('auth:admin');
+        $this->userService = $userService;
     }
 
+    // searchはGETメソッドで行う。
+    // 検索単語は持ち回る
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $query = User::query();
-        $searchedUsers = $query
-            ->where('name', 'LIKE', "%".$keyword."%")
+        $searchedUsers = $this->userService
+            ->searchByKeyword($keyword)
             ->paginate(config('app.pagesize'));
-            return view('admin.home', ['users' => $searchedUsers]);
+            return view('admin.home', [
+                'users' => $searchedUsers,
+                'keyword' => $keyword
+            ]);
     }
 
     public function index()
     {
-        $users = User::orderBy('id', 'asc')
+        $users = $this->userService
+            ->getAllUsersOrderByIdAsc()
             ->paginate(config('app.pagesize'));
         return view('admin.home', ['users' => $users]);
     }
@@ -40,7 +48,8 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $userId = $request->user;
-        $selectedUser = User::where('id', $userId)->first();
+        $selectedUser = $this->userService
+            ->findByUserId($userId);
         $books = $selectedUser->books()->get();
 
         return view('admin.user.show',[
@@ -53,9 +62,8 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $userId = $request->user;
-        $deleteUser = User::find($userId);
-        $deleteUser->delete();
-        $users = User::paginate(config('app.pagesize'));
-        return view('admin.home', ['users' => $users]);
+        $result = $this->userService
+            ->deleteByUserId($userId);
+        return redirect()->route('admin.index');
     }
 }

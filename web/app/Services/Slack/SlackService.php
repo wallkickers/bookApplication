@@ -20,4 +20,15 @@ class SlackService
         $slack_url = $slack->url ?? env('SLACK_URL');
         return $slack_url;
     }
+
+    public function find($slackId)
+    {
+        return slack::find($slackId);
+    }
+
+    public function update($slackId, $request)
+    {
+        $slack = $this->find($slackId);
+        $slack->update($request->all());
+    }
 }
