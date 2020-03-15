@@ -48,7 +48,7 @@ class CsvImportController extends Controller
                 }
             }
             // データ処理
-            if ($row_count > 1) {
+            if ($row_count > 0) {
                 $data = $row;
                 for ($c = 0; $c < count($data); $c++) {
                     if (!is_null($column_names[$c])) {
