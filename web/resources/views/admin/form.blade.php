@@ -17,6 +17,9 @@
                     @if (session('message'))
                         <div class="">{{ session('message') }}</div>
                     @endif
+                    @if (session('regist_book_count'))
+                        <div class="">登録件数：{{ session('regist_book_count') }}件</div>
+                    @endif
                     @error('csv_file')
                         <div class="">{{ $message }}</div>
                     @enderror
