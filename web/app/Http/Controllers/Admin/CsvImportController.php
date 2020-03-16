@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Book;
 use App\Http\Requests\StoreRequest;
@@ -66,6 +63,9 @@ class CsvImportController extends Controller
             $book->save();
         }
 
-        return redirect(route('admin.form'))->with('message', 'CSV登録が完了しました。');
+        return redirect(route('admin.form'))->with([
+            'message' => 'CSV登録が完了しました。',
+            'regist_book_count' => count($registration_csv_list)
+        ]);
     }
 }
