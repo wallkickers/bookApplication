@@ -169,3 +169,12 @@ a:hover {
       opacity: 1;
     }
   }
+
+.bookimage {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+figure.photo-detail__pane.photo-detail__image {
+  margin: 1rem 0 0 0;
+}
