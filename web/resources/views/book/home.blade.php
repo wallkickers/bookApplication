@@ -31,7 +31,7 @@
                         @foreach ($books as $book)
                         <tr>
                           <td>{{ $book->id }}</td>
-                          <td><a href='{{ route('books.show', ['book' => $book->id]) }}'>{{ $book->book_name }}</td>
+                          <td><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</td>
                           @if ($book->user_id)
                           <td>貸し出し中</td>
                           @else
