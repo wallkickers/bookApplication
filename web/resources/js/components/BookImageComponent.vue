@@ -1,5 +1,5 @@
 <template>
-  <div v-if="photoUrl" class="photo-detail">
+  <div v-if="photoUrl" class="photo-detail bookimage">
     <figure class="photo-detail__pane photo-detail__image">
       <img :src="photoUrl" alt="">
     </figure>
