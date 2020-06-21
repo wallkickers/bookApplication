@@ -6,13 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">詳細</div>
-                {{-- <div id="book">
-                  <book-image :val="aaa"></book-image>
-                  <template>
-                      <div v-bind:isbn="{{ $book->isbn }}"></div>
-                      <img :src="blobUrl" onerror="this.style.display='none'"/>
-                  </template>
-                </div> --}}
                 <book-image-component></book-image-component>
                 <div class="card-body">
                     @if (session('status'))
@@ -85,57 +78,3 @@
     </div>
 </div>
 @endsection
-
-{{-- @section('script')
-<script>
-  Vue.config.devtools = true;
-
-  Vue.component("book-image", {
-    props: ["blobUrl"],
-    // template: "<img :src="{{blobUrl}}"/>"
-    template: "<p>{{ blobUrl }}</p>"
-  })
-
-  new Vue({
-    el: '#book',
-    name: "ImageFromApi",
-    data: {
-      blobUrl: "";
-    },
-    // mounted() {
-    //   axios
-    //     .get('https://api.openbd.jp/v1/get?isbn=9784774153773')
-    //     .then(response => {
-    //       this.blobUrl = response.data[0].summary.cover;
-    //     });
-    // }
-  });
-
-  // export default {
-  // name: "ImageFromApi",
-  // props: {
-  //   apiUrl: {
-  //     type: String,
-  //     required: true
-  //   }
-  // },
-  // data: function() {
-  //   return {
-  //     blobUrl: ""
-  //   };
-  // },
-  // mounted() {
-  //   axios
-  //     .get('https://api.openbd.jp/v1/get?isbn=9784774153773', {
-  //       responseType: "blob"
-  //     })
-  //     .then(response => {
-  //       console.log(1);
-  //       this.blobUrl = window.URL.createObjectURL(response.data);
-  //       console.log(this.blobUrl);
-  //       console.log(response.data);
-  //     });
-  // }
-  // };
-</script> 
-@endsection --}}
