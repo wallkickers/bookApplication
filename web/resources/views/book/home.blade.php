@@ -43,6 +43,31 @@
                     {{ $books->appends(request()->input())->links() }}
                 </div>
             </div>
+
+            <div class="fh5co-narrow-content">
+                <div class="row animate-box" data-animate-effect="fadeInLeft">
+                    @foreach ($books as $book)
+                        {{-- <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">
+                            <a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>
+                                <img src="images/work_1.jpg" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                                <h3 class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</h3>
+                                @if ($book->user_id)
+                                    <p>貸し出し中</td>
+                                @endif
+                            </a>
+                        </div> --}}
+                        <book-card-component
+                            url="{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}"
+                            isbn="{{ $book->isbn }}"
+                        >
+                            <template v-slot:book-title>
+                                <h3 class="fh5co-work-title">{{ $book->book_name }}</h3>
+                            </template>
+                        </book-card-component>
+                    @endforeach
+                    <div class="clearfix visible-md-block"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
