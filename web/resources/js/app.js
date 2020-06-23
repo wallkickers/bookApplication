@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('book-image-component', require('./components/BookImageComponent.vue').default);
+Vue.component('book-card-component', require('./components/BookCardComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
