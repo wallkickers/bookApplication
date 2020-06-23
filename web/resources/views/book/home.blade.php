@@ -57,16 +57,16 @@
                             </a>
                         </div> --}}
                         <book-card-component
-                            url="{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}"
                             isbn="{{ $book->isbn }}"
                         >
-                            <template v-slot:book-title>
-                                <h3 class="fh5co-work-title">{{ $book->book_name }}</h3>
+                            <template v-slot:book-link>
+                                <h3 class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</h3>
                             </template>
                         </book-card-component>
                     @endforeach
                     <div class="clearfix visible-md-block"></div>
                 </div>
+                {{ $books->appends(request()->input())->links() }}
             </div>
         </div>
     </div>
