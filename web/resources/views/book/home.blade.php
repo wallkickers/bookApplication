@@ -60,7 +60,7 @@
                             isbn="{{ $book->isbn }}"
                         >
                             <template v-slot:book-link>
-                                <h3 class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</h3>
+                                <p class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</p>
                             </template>
                         </book-card-component>
                     @endforeach
