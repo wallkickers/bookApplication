@@ -1748,6 +1748,8 @@ __webpack_require__.r(__webpack_exports__);
 
               if (response.data[0] == null) {
                 this.photoUrl = "/images/noimage.jpg";
+              } else if (response.data[0].summary.cover == "") {
+                this.photoUrl = "/images/noimage.jpg";
               } else {
                 this.photoUrl = response.data[0].summary.cover;
               }
