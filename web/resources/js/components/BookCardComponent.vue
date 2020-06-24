@@ -25,6 +25,8 @@ export default {
       const response = await axios.get('https://api.openbd.jp/v1/get?isbn='+this.isbn)
       if(response.data[0] == null){
         this.photoUrl = "/images/noimage.jpg"
+      } else if(response.data[0].summary.cover == ""){
+        this.photoUrl = "/images/noimage.jpg"
       } else {
         this.photoUrl = response.data[0].summary.cover;
       }
