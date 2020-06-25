@@ -202,3 +202,9 @@ figure.photo-detail__pane.photo-detail__image {
   margin: 0 auto;
   width: 100px;
 }
+
+/* フッター */
+#footer{
+  height: 40px;
+  box-shadow: 0 -.125rem .25rem rgba(0,0,0,.075)!important;
+}

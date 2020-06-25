@@ -84,6 +84,8 @@
             @yield('content')
             @yield('script')
         </main>
+        <div id="footer">
+        </div>
     </div>
 </body>
 </html>
