@@ -21,15 +21,19 @@
 
             <div class="fh5co-narrow-content">
                 <div class="row animate-box" data-animate-effect="fadeInLeft">
-                    @foreach ($books as $book)
-                        <book-card-component
-                            isbn="{{ $book->isbn }}"
-                        >
-                            <template v-slot:book-link>
-                                <p class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</p>
-                            </template>
-                        </book-card-component>
-                    @endforeach
+                    @if(count($books)>0)
+                        @foreach ($books as $book)
+                            <book-card-component
+                                isbn="{{ $book->isbn }}"
+                            >
+                                <template v-slot:book-link>
+                                    <p class="fh5co-work-title"><a href='{{ route('books.show', ['book' => $book->id, 'isbn' => $book->isbn]) }}'>{{ $book->book_name }}</p>
+                                </template>
+                            </book-card-component>
+                        @endforeach
+                    @else
+                        <p class="not-found-book">お探しの書籍は見つかりませんでした。</p>
+                    @endif
                     <div class="clearfix visible-md-block"></div>
                 </div>
                 <div class="page">
