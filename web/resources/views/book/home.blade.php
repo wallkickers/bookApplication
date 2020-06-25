@@ -32,9 +32,10 @@
                     @endforeach
                     <div class="clearfix visible-md-block"></div>
                 </div>
-                {{ $books->appends(request()->input())->links() }}
+                <div class="page">
+                    {{ $books->appends(request()->input())->links() }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
