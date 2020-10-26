@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth:user'], function(){
+Route::group(['middleware' => 'auth:user'], function () {
     Route::resource('users', 'UserController');
     Route::get('books', 'BookController@index')->name('books.index');
     Route::get('books/show', 'BookController@show')->name('books.show');
@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth:user'], function(){
 });
 
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function () {
     Route::get('/',         'Admin\UserController@index')->name('admin.index');
     Route::get('/users/show', 'Admin\UserController@show')->name('admin.user.show');
     Route::delete('/users/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('login',    'Admin\LoginController@login');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function () {
     Route::post('logout',   'LoginController@logout')->name('logout');
     Route::get('/form', 'CsvImportController@create')->name('form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('import');
@@ -44,3 +44,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::resource('books', 'BookController');
 });
 
+// 企業登録
+Route::group(['prefix' => 'company', 'as' => 'company.', 'namespace' => 'Auth\Company'], function () {
+    Route::get('register',     'RegisterCompanyController@showRegisterCompanyForm')->name('register');
+    Route::post('register',    'RegisterCompanyController@registerCompany')->name('register');
+});
