@@ -15,7 +15,9 @@
         "laravel/tinker": "^1.0",
         "nesbot/carbon": "^2.24",
         "thinreports-php/thinreports-php": "^0.8.1",
-        "fzaninotto/faker": "^1.4"
+        "fzaninotto/faker": "^1.4",
+        "symfony/http-kernel": "4.4.13",
+        "symfony/http-foundation": "4.4.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
