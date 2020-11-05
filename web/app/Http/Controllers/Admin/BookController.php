@@ -35,7 +35,7 @@ class BookController extends Controller
         $book = $this->bookService
             ->findByBookId($bookId);
 
-        return view('admin.book.show',[
+        return view('admin.book.show', [
             'user' => $user,
             'book' => $book
         ]);
@@ -45,7 +45,17 @@ class BookController extends Controller
     {
         $bookId = $request->book;
         $result = $this->bookService->deleteByBookId($bookId);
-        
+
         return redirect()->route('admin.books.index');
+    }
+
+    public function history(Request $request)
+    {
+        $rental_histories = $this->bookService
+            ->getAllBookHistoriesOrderByIdAsc()
+            ->paginate(config('app.pagesize'));
+
+        return view('admin.rental_histories.index')
+            ->with(['rental_histories' => $rental_histories]);
     }
 }
