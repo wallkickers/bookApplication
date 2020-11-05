@@ -17,6 +17,7 @@ class RentalHistory extends Model
         'book_id',
         'rental_date',
         'return_date',
+        'user_id'
     ];
 
     /*
@@ -25,5 +26,13 @@ class RentalHistory extends Model
     public function book()
     {
         return $this->belongsTo('App\Book');
+    }
+
+    /*
+    該当書籍のBookモデルを返却
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
