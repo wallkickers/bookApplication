@@ -30,15 +30,8 @@
                         </tr>
                         @foreach ($rental_histories as $rental_history)
                         <tr>
-                            @isset($rental_history->book)
-                            <td>{{ $rental_history->book->book_name }}</td>
-                            <td>{{ $rental_history->book->hasUserName() }}</td>
-                            @else
-                            <td>-</td>
-                            <td>-</td>
-                            @endisset
-                          {{-- <td>{{ $rental_history->book->book_name }}</td> --}}
-                          {{-- <td>{{ $rental_history->book->hasUserName() }}</td> --}}
+                          <td>{{ $rental_history->book->book_name }}</td>
+                          <td>{{ $rental_history->user->name }}</td>
                           <td>{{ $rental_history->rental_date }}</td>
                           <td>{{ $rental_history->return_date }}</td>
                         </tr>
