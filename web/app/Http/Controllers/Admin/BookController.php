@@ -51,11 +51,21 @@ class BookController extends Controller
 
     public function history(Request $request)
     {
-        $rental_histories = $this->bookService
-            ->getAllBookHistoriesOrderByIdAsc()
-            ->paginate(config('app.pagesize'));
+        $display_item = $request->display_item;
+        if (is_null($display_item)) {
+            $rental_histories = $this->bookService
+                ->getAllBookHistoriesOrderByIdAsc();
+        } else {
+            $rental_histories = $this->bookService
+                ->getBookHistoriesWithDisplayItemOrderByIdAsc($request->display_item);
+        }
+
+        $rental_histories = $rental_histories->paginate(config('app.pagesize'));
 
         return view('admin.rental_histories.index')
-            ->with(['rental_histories' => $rental_histories]);
+            ->with([
+                'rental_histories' => $rental_histories,
+                'display_item' => $display_item,
+            ]);
     }
 }

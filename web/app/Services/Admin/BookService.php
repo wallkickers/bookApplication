@@ -32,4 +32,14 @@ class BookService
     {
         return RentalHistory::orderBy('id', 'asc');
     }
+
+    public function getBookHistoriesWithDisplayItemOrderByIdAsc($display_item)
+    {
+        if ($display_item === "return") {
+            $rental_histories = RentalHistory::whereNotNull("return_date");
+        } elseif ($display_item === "not_return") {
+            $rental_histories = RentalHistory::whereNull("return_date");
+        }
+        return $rental_histories->orderBy('id', 'asc');
+    }
 }

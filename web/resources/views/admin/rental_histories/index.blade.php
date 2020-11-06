@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">貸し出し履歴</div>
+                <div class="card-header">{{ __('view.RentalHistory') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,19 +14,23 @@
                         </div>
                     @endif
 
-                    <form method="GET" action="{{ route('users.search') }}">
+                    <form method="GET" action="{{ route('admin.rental_history') }}">
                         <div class="form-group">
-                            <input type="text" name="keyword" @isset($keyword) value="{{$keyword}}" @endisset  class="form" placeholder="名前検索">
-                            <button type="submit" value="検索" class="">検索</button>
+                            <select name="display_item">
+                                <option value="" @if($display_item=='') selected  @endif>{{ __('view.AllDisplay') }}</option>
+                                <option value="not_return" @if($display_item=='not_return') selected  @endif>{{ __('view.NotReturn') }}</option>
+                                <option value="return" @if($display_item=='return') selected  @endif>{{ __('view.Return') }}</option>
+                            </select>
+                            <button type="submit" value="表示" class="">{{ __('view.Display') }}</button>
                         </div>
                     </form>
 
                     <table class="table">
                         <tr>
-                          <th>書籍名</th>
-                          <th>借りた人</th>
-                          <th>貸出日付</th>
-                          <th>返却日</th>
+                          <th>{{ __('view.BookTitle') }}</th>
+                          <th>{{ __('view.RentalMember') }}</th>
+                          <th>{{ __('view.RentalDate') }}</th>
+                          <th>{{ __('view.ReturnDate') }}</th>
                         </tr>
                         @foreach ($rental_histories as $rental_history)
                         <tr>
