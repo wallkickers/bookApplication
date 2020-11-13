@@ -35,7 +35,7 @@
                         @foreach ($rental_histories as $rental_history)
                         <tr>
                           <td>{{ $rental_history->book->book_name }}</td>
-                          <td>{{ $rental_history->user->name }}</td>
+                          <td><a href='{{ route('admin.user.show', ['user' => $rental_history->user->id]) }}'>{{ $rental_history->user->name }}</td>
                           <td>{{ $rental_history->rental_date }}</td>
                           <td>{{ $rental_history->return_date }}</td>
                         </tr>
