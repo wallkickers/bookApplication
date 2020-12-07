@@ -40,8 +40,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::get('/pdf', 'PdfController@show')->name('book_pdf');
     Route::get('/slack', 'SlackController@index')->name('slack');
     Route::post('/slack/update', 'SlackController@update')->name('slack.update');
-
     Route::resource('books', 'BookController');
+
+    // 貸し出し履歴
+    Route::get('/rental_history', 'BookController@history')->name('rental_history');
 });
 
 // 企業登録

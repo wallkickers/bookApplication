@@ -18,4 +18,13 @@ return [
     'AdminE-Mail' => '管理者メールアドレス',
     'AdminPassword' => '管理者パスワード',
     'AdminConfirmPassword' => '管理者パスワード(確認)',
+    'RentalHistory' => '貸し出し履歴',
+    'AllDisplay' => '全て',
+    'NotReturn' => '未返却',
+    'Return' => '返却済',
+    'Display' => '表示',
+    'BookTitle' => '書籍名',
+    'RentalMember' => '借りた人',
+    'RentalDate' => '貸出日付',
+    'ReturnDate' => '返却日',
 ];
