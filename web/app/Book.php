@@ -15,19 +15,19 @@ class Book extends Model
      * @var array
      */
     protected $fillable = [
-        'book_name', 
-        'title_kana', 
-        'subtitle', 
-        'subtitle_kana', 
-        'isbn', 
-        'author', 
-        'author_kana', 
-        'publisher', 
-        'url', 
+        'book_name',
+        'title_kana',
+        'subtitle',
+        'subtitle_kana',
+        'isbn',
+        'author',
+        'author_kana',
+        'publisher',
+        'url',
     ];
 
     /**
-     * CSVヘッダ項目の定義値があれば定義配列のkeyを返す   
+     * CSVヘッダ項目の定義値があれば定義配列のkeyを返す
      *
      * @param string $header
      * @param string $encoding
@@ -47,7 +47,7 @@ class Book extends Model
             'publisher' => "publisher",
             'url' => "url",
         ];
-        
+
         foreach ($list as $key => $value) {
             if ($header === $value) {
                 return $key;
@@ -59,14 +59,16 @@ class Book extends Model
     /*
     書籍を借りている人のUserモデルを返却
     */
-    public function user(){
-        return belongsTo('App\User');
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
     /*
     書籍を借りている人の名前を返却
     */
-    public function hasUserName(){
+    public function hasUserName()
+    {
         if ($this->user_id) {
             $userId = $this->user_id;
             $userName = User::find($userId)->name;

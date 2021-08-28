@@ -12,6 +12,20 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="company_code" class="col-md-4 col-form-label text-md-right">{{ __('view.CompanyID') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="company_code" type="string" class="form-control @error('company_code') is-invalid @enderror" name="company_code" value="ABCDE" required autocomplete="company_code" autofocus placeholder="ABCDE">
+
+                                @error('company_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

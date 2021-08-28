@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\User;
 
 use App\Book;
@@ -7,13 +8,14 @@ use Carbon\Carbon;
 
 class ApplicationService
 {
-    public function createHistory($bookId)
+    public function createHistory($bookId, $userId)
     {
         $nowDateTime = Carbon::now()->toDateTimeString();
         RentalHistory::create([
             'book_id' => $bookId,
-            'rental_date' => $nowDateTime
-            ])->save();
+            'rental_date' => $nowDateTime,
+            'user_id' => $userId
+        ])->save();
     }
 
     public function UpdateRentalDate($bookId)
@@ -22,7 +24,7 @@ class ApplicationService
         $rentalHistory = RentalHistory::where([
             'book_id' => $bookId,
             'return_date' => null
-            ])->first();
+        ])->first();
         $rentalHistory->update(['return_date' => $nowDateTime]);
     }
 }

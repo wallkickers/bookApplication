@@ -14,15 +14,25 @@ class RentalHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'book_id', 
-        'rental_date', 
+        'book_id',
+        'rental_date',
         'return_date',
+        'user_id'
     ];
 
     /*
     該当書籍のBookモデルを返却
     */
-    public function book(){
-        return belongsTo('App\Book');
+    public function book()
+    {
+        return $this->belongsTo('App\Book');
+    }
+
+    /*
+    該当書籍のBookモデルを返却
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
