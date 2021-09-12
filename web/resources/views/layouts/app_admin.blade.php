@@ -66,6 +66,9 @@
                                         <a class="dropdown-item" href="{{ route('admin.slack') }}">
                                             通知設定
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('admin.rental_history') }}">
+                                            {{ __('view.pageTitle.RentalHistory') }}
+                                        </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                            onclick="event.preventDefault();

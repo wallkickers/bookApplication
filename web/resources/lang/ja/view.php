@@ -27,4 +27,7 @@ return [
     'RentalMember' => '借りた人',
     'RentalDate' => '貸出日付',
     'ReturnDate' => '返却日',
+    'pageTitle' => [
+        'RentalHistory' => '貸し出し履歴',
+    ]
 ];
