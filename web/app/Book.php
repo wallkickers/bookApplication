@@ -77,4 +77,12 @@ class Book extends Model
             return null;
         }
     }
+
+    /**
+     * 書籍を借りている人の名前を返却
+     */
+    public function getAllBooksByUserId($userId)
+    {
+        return Book::where('user_id', $userId)->get();
+    }
 }
