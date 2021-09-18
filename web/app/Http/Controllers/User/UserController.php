@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\User;
 
-use App\Book;
 use App\Http\Controllers\Controller;
+use App\Services\User\BookService;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    private $book;
+    private $bookService;
 
-    public function __construct(Book $book)
+    public function __construct(BookService $bookService)
     {
-        $this->book = $book;
+        $this->bookService = $bookService;
     }
 
     public function show()
     {
         $user = Auth::user();
         $userId = $user->id;
-        $books = $this->book->getAllBooksByUserId($userId);
+        $books = $this->bookService->getAllBooksByUserId($userId);
 
         return view('user.show', compact('user', 'books'));
     }

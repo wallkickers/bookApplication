@@ -25,4 +25,12 @@ class BookService
         $book->user_id = $parameter;
         $book->save();
     }
+
+    /**
+     * 書籍を借りている人の名前を返却
+     */
+    public function getAllBooksByUserId($userId)
+    {
+        return Book::where('user_id', $userId)->get();
+    }
 }
