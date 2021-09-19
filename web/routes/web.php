@@ -16,7 +16,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth:user'], function () {
-    Route::resource('users', 'UserController');
+    // マイページ
+    Route::get('users/', 'User\UserController@show')->name('users.show');
     Route::get('books', 'BookController@index')->name('books.index');
     Route::get('books/show', 'BookController@show')->name('books.show');
     Route::get('books/search', 'BookController@search')->name('books.search');
