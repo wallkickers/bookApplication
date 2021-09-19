@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
-// require 'vendor/autoload.php';
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
+use App\Services\BookService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Services\User\BookService;
 
 class BookController extends Controller
 {
@@ -20,13 +21,10 @@ class BookController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        $searchedBooks = $this->bookService
+        $books = $this->bookService
             ->searchByKeyword($keyword)
             ->paginate(config('app.pagesize'));
-        return view('book.home')->with([
-            'books' => $searchedBooks,
-            'keyword' => $keyword
-        ]);
+        return view('book.home', compact('books', 'keyword'));
     }
 
     public function index()
@@ -35,21 +33,15 @@ class BookController extends Controller
             ->getAllBooksOrderByIdAsc()
             ->paginate(config('app.pagesize'));
 
-        return view('book.home')->with([
-            'books' => $books
-        ]);
+        return view('book.home', compact('books'));
     }
 
     public function show(Request $request)
     {
         $user = Auth::user();
         $bookId = $request->book;
-        $book = $this->bookService
-            ->findByBookId($bookId);
+        $book = $this->bookService->findByBookId($bookId);
 
-        return view('book.show',[
-            'user' => $user,
-            'book' => $book
-        ]);
+        return view('book.show', compact('user', 'book'));
     }
 }
