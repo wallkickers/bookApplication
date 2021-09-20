@@ -41,16 +41,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::delete('/users/{user}', 'UserController@destroy')->name('user.destroy');
     Route::get('users/search', 'UserController@search')->name('users.search');
 
+    // 書籍
+    Route::get('books', 'BookController@index')->name('books');
+    Route::get('books/{book}', 'BookController@show')->name('books.show');
+    Route::delete('books/{book}', 'BookController@destroy')->name('books.destroy');
+
+    // 貸し出し履歴
+    Route::get('/rental_history', 'BookController@history')->name('rental_history');
+
     Route::post('logout',   'LoginController@logout')->name('logout');
     Route::get('/form', 'CsvImportController@create')->name('form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('import');
     Route::get('/pdf', 'PdfController@show')->name('book_pdf');
     Route::get('/slack', 'SlackController@index')->name('slack');
     Route::post('/slack/update', 'SlackController@update')->name('slack.update');
-    Route::resource('books', 'BookController');
-
-    // 貸し出し履歴
-    Route::get('/rental_history', 'BookController@history')->name('rental_history');
 });
 
 // 企業登録
