@@ -15,14 +15,16 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth:user'], function () {
+Route::group(['middleware' => 'auth:user', 'namespace' => 'User'], function () {
     // マイページ
-    Route::get('users/', 'User\UserController@show')->name('users.show');
+    Route::get('users/', 'UserController@show')->name('users.show');
 
     // 書籍
-    Route::get('books', 'User\BookController@index')->name('books.index');
-    Route::get('books/show', 'User\BookController@show')->name('books.show');
-    Route::get('books/search', 'User\BookController@search')->name('books.search');
+    Route::get('books', 'BookController@index')->name('books.index');
+    Route::get('books/show', 'BookController@show')->name('books.show');
+    Route::get('books/search', 'BookController@search')->name('books.search');
+
+    // 書籍貸出し
     Route::resource('application', 'ApplicationController');
 });
 
