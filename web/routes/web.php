@@ -30,15 +30,17 @@ Route::group(['middleware' => 'auth:user', 'namespace' => 'User'], function () {
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/',         'Admin\UserController@index')->name('admin.index');
-    Route::get('/users/show', 'Admin\UserController@show')->name('admin.user.show');
-    Route::delete('/users/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
-    Route::get('users/search', 'Admin\UserController@search')->name('users.search');
     Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login',    'Admin\LoginController@login');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin', 'namespace' => 'Admin'], function () {
+    // ユーザー
+    Route::get('/',         'UserController@index')->name('index');
+    Route::get('/users/show', 'UserController@show')->name('user.show');
+    Route::delete('/users/{user}', 'UserController@destroy')->name('user.destroy');
+    Route::get('users/search', 'UserController@search')->name('users.search');
+
     Route::post('logout',   'LoginController@logout')->name('logout');
     Route::get('/form', 'CsvImportController@create')->name('form');
     Route::post('form/import-csv', 'CsvImportController@store')->name('import');
