@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <form method="GET" action="{{ route('users.search') }}">
+                    <form method="GET" action="{{ route('admin.users.search') }}">
                         <div class="form-group">
                             <input type="text" name="keyword" @isset($keyword) value="{{$keyword}}" @endisset  class="form" placeholder="名前検索">
                             <button type="submit" value="検索" class="">検索</button>
