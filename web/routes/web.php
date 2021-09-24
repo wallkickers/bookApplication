@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     Route::get('users/search', 'UserController@search')->name('users.search');
 
     // 書籍
-    Route::get('books', 'BookController@index')->name('books');
+    Route::get('books', 'BookController@index')->name('books.index');
     Route::get('books/{book}', 'BookController@show')->name('books.show');
     Route::delete('books/{book}', 'BookController@destroy')->name('books.destroy');
 
