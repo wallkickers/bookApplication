@@ -70,6 +70,20 @@ class BookService
     }
 
     /**
+     * 書籍登録
+     * @param array $booksData
+     * @return
+     */
+    public function registerBooks(array $booksData)
+    {
+        foreach ($booksData as $value) {
+            $book = new Book();
+            $book->fill($value);
+            $book->save();
+        }
+    }
+
+    /**
      * TODO: const.php、Enum辺りで定数を定義
      * 書籍履歴取得_表示条件あり
      * @param string $display_item
