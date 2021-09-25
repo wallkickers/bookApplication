@@ -91,6 +91,16 @@ return [
             'prefix_indexes' => true,
         ],
 
+        // phpunit用DB設定
+        'testing' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+            'options'  => [
+                // テストデータの永続化
+                PDO::ATTR_PERSISTENT => false,
+            ],
+        ],
     ],
 
     /*

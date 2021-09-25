@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(InitialDataSeeder::class);
+        // 開発用
+        // $this->call(InitialDataSeeder::class);
+
+        // テスト用
+        $this->call(TestDataSeeder::class);
     }
 }
