@@ -1,21 +1,25 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Services\Admin;
 
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserService
 {
-    public function searchByKeyword($keyword)
+    public function searchByKeyword(string $keyword): Builder
     {
         return User::where('name', 'LIKE', "%".$keyword."%");
     }
 
-    public function getAllUsersOrderByIdAsc()
+    public function getAllUsersOrderByIdAsc(): Builder
     {
         return User::orderBy('id', 'asc');
     }
 
-    public function findByUserId($userId)
+    public function findByUserId($userId): Builder
     {
         return User::find($userId);
     }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
-// require 'vendor/autoload.php';
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
+use App\Services\BookService;
 use Illuminate\Support\Facades\Auth;
-use App\Services\User\BookService;
 
 class UserController extends Controller
 {
@@ -20,12 +21,8 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $userId = $user->id;
-        $books = $this->bookService
-            ->getAllBooksByUserId($userId);
+        $books = $this->bookService->getAllBooksByUserId($userId);
 
-        return view('user.show',[
-            'user' => $user,
-            'books' => $books
-        ]);
+        return view('user.show', compact('user', 'books'));
     }
 }
