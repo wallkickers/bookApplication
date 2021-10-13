@@ -14,7 +14,12 @@ class AddUserIdToRentalHistories extends Migration
     public function up()
     {
         Schema::table('rental_histories', function (Blueprint $table) {
-            $table->BigInteger('user_id')->unsigned();
+            $table->BigInteger('user_id')->unsigned()->nullable();
+        });
+        Schema::table('rental_histories', function (Blueprint $table) {
+            $table->BigInteger('user_id')->nullable(false)->change();
+        });
+        Schema::table('rental_histories', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')->on('users');
         });
