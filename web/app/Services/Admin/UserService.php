@@ -19,7 +19,7 @@ class UserService
         return User::orderBy('id', 'asc');
     }
 
-    public function findByUserId($userId): Builder
+    public function findByUserId(int $userId): User
     {
         return User::find($userId);
     }

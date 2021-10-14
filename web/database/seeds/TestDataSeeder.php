@@ -24,9 +24,22 @@ class TestDataSeeder extends Seeder
 
             $user = factory(User::class)->create(
                 [
+                    'id' => 1,
+                    'name' => '田中',
+                    'email' => 'tanaka@example.com',
                     'company_id' => $company->id,
                 ]
             );
+
+            // nameが「田中」
+            for ($i=0; $i<5; $i++) {
+                factory(User::class)->create(
+                    [
+                        'name' => '単体' . $i,
+                        'company_id' => $company->id,
+                    ]
+                );
+            }
 
             factory(Book::class)->create(
                 [
