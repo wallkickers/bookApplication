@@ -16,7 +16,12 @@ class AddCompanyIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->Integer('company_id')->unsigned();
+            $table->Integer('company_id')->unsigned()->nullable();
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->Integer('company_id')->unsigned()->nullable(false)->change();
+        });
+        Schema::table('users', function (Blueprint $table) {
             $table->foreign('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');

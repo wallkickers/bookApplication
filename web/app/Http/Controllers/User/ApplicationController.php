@@ -17,7 +17,7 @@ class ApplicationController extends Controller
 
     public function __construct(
         BookService $bookService,
-        ApplicationService $applicationService,
+        ApplicationService $applicationService
     ) {
         $this->bookService = $bookService;
         $this->applicationService = $applicationService;
