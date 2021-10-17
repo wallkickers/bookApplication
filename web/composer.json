@@ -9,15 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
         "laravel/framework": "6.20.26",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^1.0",
         "nesbot/carbon": "^2.24",
-        "thinreports-php/thinreports-php": "^0.8.1",
-        "fzaninotto/faker": "^1.4",
-        "symfony/http-kernel": "4.4.13",
-        "symfony/http-foundation": "4.4.7"
+        "symfony/http-foundation": "4.4.7",
+        "symfony/http-kernel": "4.4.13"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -31,7 +31,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform-check": false
     },
     "extra": {
         "laravel": {

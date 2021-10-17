@@ -14,7 +14,12 @@ class AddCompanyIdToAdmins extends Migration
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->Integer('company_id')->unsigned();
+            $table->Integer('company_id')->unsigned()->nullable();
+        });
+        Schema::table('admins', function (Blueprint $table) {
+            $table->Integer('company_id')->nullable(false)->change();
+        });
+        Schema::table('admins', function (Blueprint $table) {
             $table->foreign('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');

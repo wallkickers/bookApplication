@@ -10,6 +10,7 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "@popperjs/core": "^2.10.2",
     "axios": ">=0.21.2",
     "bootstrap": "^5.1.0",
     "browser-sync": "^2.27.5",
@@ -20,9 +21,12 @@
     "lodash": "^4.17.21",
     "popper.js": "^1.16.1",
     "resolve-url-loader": "^4.0.0",
+    "rework": "^1.0.1",
+    "rework-visit": "^1.0.0",
     "sass": "^1.38.2",
     "sass-loader": "^12.1.0",
     "vue": "^2.6.14",
     "y18n": ">=5.0.8"
-  }
+  },
+  "dependencies": {}
 }

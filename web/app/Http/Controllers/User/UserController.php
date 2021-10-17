@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Services\User\BookService;
+use App\Services\BookService;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
