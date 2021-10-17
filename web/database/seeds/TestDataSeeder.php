@@ -43,7 +43,8 @@ class TestDataSeeder extends Seeder
 
             factory(Book::class)->create(
                 [
-                    'user_id' => $user->id
+                    'book_name' => '単体',
+                    'user_id' => $user->id,
                 ]
             );
         });
