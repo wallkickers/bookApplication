@@ -45,9 +45,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth:admin
     // 貸し出し履歴
     Route::get('/rental_history', 'BookController@history')->name('rental_history');
 });
-
-// 企業登録
-Route::group(['prefix' => 'company', 'as' => 'company.', 'namespace' => 'Auth\Company'], function () {
-    Route::get('register',     'RegisterCompanyController@showRegisterCompanyForm')->name('register');
-    Route::post('register',    'RegisterCompanyController@registerCompany')->name('register');
-});
