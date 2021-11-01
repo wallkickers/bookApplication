@@ -42,9 +42,6 @@
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('company.register') }}">{{ __('view.CompanyRegister') }}</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.login') }}">{{ __('view.Login') }}</a>
                                 </li>
                             @else
@@ -65,6 +62,9 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.slack') }}">
                                             通知設定
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.rental_history') }}">
+                                            履歴
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}"

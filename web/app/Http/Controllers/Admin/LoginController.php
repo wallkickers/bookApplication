@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -55,24 +53,5 @@ class LoginController extends Controller
     {
         Auth::logout();
         return Redirect::route('admin.login');
-    }
-
-    /**
-     * Get the needed authorization credentials from the request.
-     * 管理者の認証条件に企業コードを追加
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    protected function credentials(Request $request)
-    {
-        if (Company::where('code', $request->company_code)->exists()) {
-            $company_id = Company::where('code', $request->company_code)->first()->id;
-        } else {
-            $company_id = null;
-        }
-        $temp = $request->only($this->username(), 'password', 'company_id');
-        $temp['company_id'] = $company_id;
-        return $temp;
     }
 }
