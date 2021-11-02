@@ -47,10 +47,12 @@ class ApplicationController extends Controller
         $this->bookService->updateBookByParam($book, $userId);
 
         // 貸出時にrental_hitoryテーブルを追加
-        $this->applicationService->createHistory($bookId);
+        $this->applicationService->createHistory($bookId, $userId);
 
-        $this->slackService->send('貸し出し申請がありました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
-        return view('application.complete')->with(['message'=>'貸し出し完了']);
+        $this->slackService->send(
+            '貸し出し申請がありました。名前：' . $user->name . ' 書籍名：' . $book->book_name . '：URL:' . env('APP_URL') . '/books/' . $book->id
+        );
+        return view('application.complete')->with(['message' => '貸し出し完了']);
     }
 
     public function destroy(Request $request)
@@ -65,7 +67,9 @@ class ApplicationController extends Controller
         // 返却時に該当のrental_hitoryテーブルを更新
         $this->applicationService->UpdateRentalDate($bookId);
 
-        $this->slackService->send('本が返却されました。名前：'.$user->name.' 書籍名：'.$book->book_name.'：URL:'.env('APP_URL').'/books/'.$book->id);
-        return view('application.complete')->with(['message'=>'返却完了']);;
-    }    
+        $this->slackService->send(
+            '本が返却されました。名前：' . $user->name . ' 書籍名：' . $book->book_name . '：URL:' . env('APP_URL') . '/books/' . $book->id
+        );
+        return view('application.complete')->with(['message' => '返却完了']);
+    }
 }
